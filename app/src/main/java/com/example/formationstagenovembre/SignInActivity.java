@@ -21,12 +21,7 @@ public class SignInActivity extends AppCompatActivity {
         register = findViewById(R.id.register);
         Button signInButton = findViewById(R.id.sign_in_btn);
 
-        signInButton.setOnClickListener(v ->{
 
-                Intent intent = new Intent(SignInActivity.this, SecondActivity.class);
-                startActivity(intent);
-
-        });
 
         forgot_psw.setOnClickListener(v -> {
 

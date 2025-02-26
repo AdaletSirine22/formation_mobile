@@ -106,7 +106,7 @@ public class SignUpActivity extends AppCompatActivity {
             email.setError("email is  invalid");
         } else if (phoneString.length() != 8) {
             phone.setError("phone is invalid");
-        } else if (passwordString.length() < 5) {
+        } else if (passwordString.length() < 6) {
             password.setError("password is invalid");
         } else if (!confirmPasswordString.equals(passwordString)) {
             confirmPassword.setError("confirm password is invalid");
