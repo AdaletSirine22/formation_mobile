@@ -13,11 +13,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.formationstagenovembre.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -78,7 +81,7 @@ public class SignUpActivity extends AppCompatActivity {
         if (loggedUser != null) {
             loggedUser.sendEmailVerification().addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
-                    // send user data
+                    sendUserData();
                     Toast.makeText(this, "Registration Done! Please check your Email address", Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
                     Intent intent = new Intent(SignUpActivity.this, SignInActivity.class);
@@ -90,6 +93,13 @@ public class SignUpActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private void sendUserData() {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference firebaseReference = firebaseDatabase.getReference("users");
+        User user = new User(fullnameString, emailString, phoneString);
+        firebaseReference.child(firebaseAuth.getUid() + "").setValue(user);
     }
 
     private boolean validate() {

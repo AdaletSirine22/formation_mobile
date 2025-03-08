@@ -111,7 +111,8 @@
                 android:layout_marginHorizontal="25dp"
                 android:drawableEnd="@drawable/ic_password"
                 android:background="@drawable/edit_text_shape"
-                android:layout_marginBottom="-25dp"/>
+                android:layout_marginBottom="-25dp"
+                android:inputType="textPassword"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -131,7 +132,8 @@
                 android:layout_marginHorizontal="25dp"
                 android:drawableEnd="@drawable/ic_password"
                 android:background="@drawable/edit_text_shape"
-                android:layout_marginBottom="-20dp"/>
+                android:layout_marginBottom="-20dp"
+                android:inputType="textPassword"/>
 
             <Button
                 android:id="@+id/sign_up_btn"
