@@ -1,6 +1,7 @@
 package com.example.formationstagenovembre;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 
@@ -28,6 +29,10 @@ public class HomeActivity extends AppCompatActivity {
         logOutButton.setOnClickListener(v -> {
             firebaseAuth.signOut();
             startActivity(new Intent(this, SignInActivity.class));
+            SharedPreferences preferences = getSharedPreferences("checkBoxRemember", MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putBoolean("isChecked",false);
+            editor.apply();
             finish();
 
         });

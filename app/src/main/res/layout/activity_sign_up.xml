@@ -141,7 +141,7 @@
                 android:layout_height="50dp"
                 android:backgroundTint="@color/darkRed"
                 android:text="sign up"
-                android:textSize="17dp"
+                android:textSize="15dp"
                 android:textStyle="bold"
                 app:cornerRadius="25dp"
                 android:layout_gravity="center"

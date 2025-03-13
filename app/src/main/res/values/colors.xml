@@ -13,6 +13,8 @@
     <color name="darkRed">#8E3D3D</color>
     <color name="shapeColor">#FFEFF5</color>
     <color name="edit_text_color">#E5C5CC</color>
+    <color name="red_color">#ff0033</color>
+
 
 
 </resources>

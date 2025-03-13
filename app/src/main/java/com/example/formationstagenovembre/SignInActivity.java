@@ -3,6 +3,7 @@ package com.example.formationstagenovembre;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -15,7 +16,11 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class SignInActivity extends AppCompatActivity {
+    private static final String EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@(.+)$";
     private Button signInButton;
     private TextView forgot_psw, goToRegister;
     private EditText email, password;
@@ -40,10 +45,28 @@ public class SignInActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(this);
 
+        //remember me checkbox
+        SharedPreferences preferences = getSharedPreferences("checkBoxRemember", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        boolean isRememberMeChecked = preferences.getBoolean("isChecked", false);
+
+        if (isRememberMeChecked) {
+            startActivity(new Intent(this, ProfileActivity.class));
+        }
+
+        rememberMe.setOnCheckedChangeListener(((buttonView, isChecked) -> {
+            if (buttonView.isChecked()) {
+                editor.putBoolean("isChecked", true);
+                editor.apply();
+            } else {
+                editor.putBoolean("isChecked", false);
+                editor.apply();
+            }
+        }));
+
         forgot_psw.setOnClickListener(v -> {
             Intent intent = new Intent(SignInActivity.this, ResetPasswordActivity.class);
             startActivity(intent);
-
         });
 
         goToRegister.setOnClickListener(v -> {
@@ -52,29 +75,47 @@ public class SignInActivity extends AppCompatActivity {
         });
 
         signInButton.setOnClickListener(v -> {
-            emailString = email.getText().toString().trim();
-            passwordString = password.getText().toString().trim();
-            progressDialog.setMessage("Please wait... ");
-            progressDialog.show();
+            if (validate()) {
+                progressDialog.setMessage("Please wait... ");
+                progressDialog.show();
 
-            firebaseAuth.signInWithEmailAndPassword(emailString, passwordString).addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    checkEmailVerification();
+                firebaseAuth.signInWithEmailAndPassword(emailString, passwordString).addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        checkEmailVerification();
 
-                } else {
-                    Toast.makeText(this, "Sign in failed", Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
-                }
-            });
-
+                    } else {
+                        Toast.makeText(this, "Sign in failed", Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                    }
+                });
+            }
         });
+    }
+
+    private boolean validate() {
+        boolean result = false;
+        emailString = email.getText().toString().trim();
+        passwordString = password.getText().toString().trim();
+        if (!isValidRegex(emailString, EMAIL_REGEX)) {
+            email.setError("email is  invalid");
+        } else if (passwordString.length() < 6) {
+            password.setError("password is invalid");
+        } else
+            result = true;
+        return result;
+    }
+
+    private boolean isValidRegex(String mot, String regex) {
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(mot);
+        return matcher.matches();
     }
 
     private void checkEmailVerification() {
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if (user != null) {
             if (user.isEmailVerified()) {
-                startActivity(new Intent(SignInActivity.this, HomeActivity.class));
+                startActivity(new Intent(SignInActivity.this, ProfileActivity.class));
                 finish();
             } else {
                 Toast.makeText(this, "Please verify your email!", Toast.LENGTH_SHORT).show();
