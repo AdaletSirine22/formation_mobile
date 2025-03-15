@@ -51,7 +51,7 @@ public class SignInActivity extends AppCompatActivity {
         boolean isRememberMeChecked = preferences.getBoolean("isChecked", false);
 
         if (isRememberMeChecked) {
-            startActivity(new Intent(this, ProfileActivity.class));
+            startActivity(new Intent(this, HomeActivity.class));
         }
 
         rememberMe.setOnCheckedChangeListener(((buttonView, isChecked) -> {
@@ -115,7 +115,7 @@ public class SignInActivity extends AppCompatActivity {
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if (user != null) {
             if (user.isEmailVerified()) {
-                startActivity(new Intent(SignInActivity.this, ProfileActivity.class));
+                startActivity(new Intent(SignInActivity.this, HomeActivity.class));
                 finish();
             } else {
                 Toast.makeText(this, "Please verify your email!", Toast.LENGTH_SHORT).show();
