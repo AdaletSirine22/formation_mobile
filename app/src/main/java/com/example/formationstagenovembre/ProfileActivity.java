@@ -122,7 +122,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                 drawerLayout.openDrawer(GravityCompat.START);
             }
         });
-        drawerLayout.setScrimColor(getResources().getColor(R.color.darkRed));
+        drawerLayout.setScrimColor(getResources().getColor(R.color.gray));
 
     }
 
@@ -140,6 +140,9 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         if(menuItem.getItemId() == R.id.devices){
             drawerLayout.closeDrawer(GravityCompat.START);
             startActivity(new Intent(this,HomeActivity.class));
+        } else if (menuItem.getItemId() == R.id.ticket) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+            startActivity(new Intent(this,TicketActivity.class));
         } else if (menuItem.getItemId() == R.id.profile) {
             drawerLayout.closeDrawer(GravityCompat.START);
         }

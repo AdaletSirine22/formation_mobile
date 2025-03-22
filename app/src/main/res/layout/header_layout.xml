@@ -19,6 +19,7 @@
         android:text="Welcome to my app"
         android:textColor="@color/darkRed"
         android:textSize="22sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:fontFamily="serif"/>
 
 </LinearLayout>

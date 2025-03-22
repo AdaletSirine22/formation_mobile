@@ -31,24 +31,27 @@
             android:src="@drawable/ic_menu" />
 
         <EditText
+            android:id="@+id/device_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Device name"
             android:layout_marginHorizontal="25dp"
-            android:drawableEnd="@drawable/ic_email"
+            android:drawableEnd="@drawable/ic_device_name"
             android:background="@drawable/edit_text_shape"
             android:layout_marginTop="10dp"/>
 
         <EditText
+            android:id="@+id/device_value"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Device value"
             android:layout_marginHorizontal="25dp"
-            android:drawableEnd="@drawable/ic_email"
+            android:drawableEnd="@drawable/ic_device_value"
             android:background="@drawable/edit_text_shape"
             android:layout_marginTop="20dp" />
 
         <Button
+            android:id="@+id/add_device_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Add device"
@@ -57,10 +60,11 @@
             android:layout_marginTop="20sp"
             app:cornerRadius="25sp"/>
 
-
-
+        <ListView
+            android:id="@+id/list_devices"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
-
 
 </androidx.drawerlayout.widget.DrawerLayout>

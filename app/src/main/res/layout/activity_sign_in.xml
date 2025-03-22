@@ -82,7 +82,8 @@
                 android:layout_height="wrap_content"
                 android:text="remember me"
                 android:layout_margin="10dp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textColor="@color/gray"/>
 
             <TextView
                 android:id="@+id/forgot_psw"
