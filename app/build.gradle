@@ -45,4 +45,13 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:23.2.0'
     implementation 'com.google.firebase:firebase-database:20.0.4'
 
+    //pdf
+    implementation ("com.itextpdf:itext-pdfa:5.5.13.3")
+    implementation ("com.itextpdf:itextg:5.5.10")
+    implementation ("com.itextpdf:root:7.2.2")
+    implementation ("com.itextpdf:itext7-core:7.2.2")
+    implementation ("com.itextpdf:io:7.2.2")
+    implementation ("com.itextpdf:kernel:7.2.2")
+    implementation ("com.itextpdf:layout:7.2.2")
+
 }
